@@ -1,31 +1,35 @@
-const pool = require('../data/config');
+const db = require('../data/databaseModel');
 
 const authorization = {
     login(request, response) {
-    pool.query("SELECT COUNT(1) CNT from USER WHERE USERNAME=? and PASSWORD=?",
-        [request.query.username, request.query.password],
-        (error, result) => {
-            const responseToSend = {code:200, message:""};
-            if (error) {
-                responseToSend.code = 500;
-                responseToSend.message = 'Internal Server Error. Contact administrator!';
-                console.error(error);
+        const responseToSend = {code: 200, message: "", user: null};
+        db.USER.findOne({
+            where: {
+                USERNAME: request.query.username,
+                PASSWORD: request.query.password,
+                STATUS: 1
+            },
+            attributes: ['FIRST_NAME', 'LAST_NAME', 'EMAIL', 'PHONE_NO']
+        }).then(user => {
+            if (user) {
+                responseToSend.code = 200;
+                responseToSend.message = 'Success';
+                responseToSend.user = user;
             } else {
-                if (result[0]["CNT"] === 1) {
-                    console.log("Found user!");
-                    responseToSend.code = 200;
-                    responseToSend.message = 'Success';
-
-                } else {
-                    responseToSend.code = 401;
-                    responseToSend.message = 'Invalid Credentials';
-                }
+                responseToSend.code = 401;
+                responseToSend.message = 'Invalid Credentials';
             }
+        }).catch(reason => {
+            responseToSend.code = 500;
+            responseToSend.message = 'Internal Server Error. Contact administrator!';
+            console.error(reason);
+        }).finally(() => {
             response.status(responseToSend.code).send({
-                message: responseToSend.message
+                message: responseToSend.message,
+                user: responseToSend.user
             });
         });
-}
+    }
 };
 
 
