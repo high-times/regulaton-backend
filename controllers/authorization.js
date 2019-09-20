@@ -5,23 +5,25 @@ const authorization = {
     pool.query("SELECT COUNT(1) CNT from USER WHERE USERNAME=? and PASSWORD=?",
         [request.query.username, request.query.password],
         (error, result) => {
+            const responseToSend = {code:200, message:""};
             if (error) {
-                response.status(500).send({
-                    message: 'Internal Server Error. Contact administrator!'
-                });
+                responseToSend.code = 500;
+                responseToSend.message = 'Internal Server Error. Contact administrator!';
                 console.error(error);
             } else {
                 if (result[0]["CNT"] === 1) {
                     console.log("Found user!");
-                    response.status(200).send({
-                        message: 'Success'
-                    });
+                    responseToSend.code = 200;
+                    responseToSend.message = 'Success';
+
                 } else {
-                    response.status(401).send({
-                        message: 'Invalid Credentials'
-                    });
+                    responseToSend.code = 401;
+                    responseToSend.message = 'Invalid Credentials';
                 }
             }
+            response.status(responseToSend.code).send({
+                message: responseToSend.message
+            });
         });
 }
 };
