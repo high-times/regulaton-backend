@@ -15,7 +15,13 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
+
+//REST API Routes
 routes(app);
+
+//GraphQL Endpoint
+
+
 
 // Start the server
 const server = app.listen(port, (error) => {
