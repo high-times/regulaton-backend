@@ -2,7 +2,7 @@ const express = require('express');
 const port = 3002;
 const app = express();
 const bodyParser = require('body-parser');
-const routes = require('./routes');
+const routes = require('./routing/routes');
 
 // Use Node.js body parsing middleware
 app.use(bodyParser.json());
