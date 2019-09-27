@@ -9,7 +9,7 @@ const authorization = {
                 PASSWORD: request.query.password,
                 STATUS: 1
             },
-            attributes: ['FIRST_NAME', 'LAST_NAME', 'EMAIL', 'PHONE_NO']
+            attributes: ['FIRST_NAME', 'LAST_NAME', 'EMAIL']
         }).then(user => {
             if (user) {
                 responseToSend.code = 200;

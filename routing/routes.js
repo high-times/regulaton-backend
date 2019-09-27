@@ -1,4 +1,3 @@
-const defaultController = require('../controllers/default');
 const bookingRoutes = require('./bookingRoutes');
 const contactRoutes = require('./contactRoutes');
 const userRoutes = require("./userRoutes");
@@ -7,7 +6,7 @@ const demurrageConfigRoutes = require('./demurrageConfigRoutes');
 const inventoryRoutes = require('./inventoryRoutes');
 const authorizationRoutes = require('./authorizationRoutes');
 
-const router = app => {
+const router = (app) => {
 
     authorizationRoutes(app);
     inventoryRoutes(app);
