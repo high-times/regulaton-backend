@@ -30,6 +30,8 @@ const contact = {
     },
 
     get(request, response) {
+
+        console.log("Fetching contacts ... ");
         //defaultController.sendResponse(request, response);
         const responseToSend = {code: 200, rows: [], totalCount: 0};
         let filter = null;
@@ -38,6 +40,9 @@ const contact = {
         }
         db.CONTACT.findAndCountAll({
             where: filter || {},
+            order: [
+                ['NAME', 'ASC'],
+            ],
             limit: parseInt(request.query.limit),
             offset: parseInt(request.query.offset),
             attributes: ['CONTACT_ID', 'NAME',

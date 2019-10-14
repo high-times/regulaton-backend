@@ -25,13 +25,13 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="fceea9c8-2e9f-48eb-95e5-9552f7358b69">
-        <schema name="myVUCAu40e" object-types="view, table" />
+        <schema name="myVUCAu40e" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="fceea9c8-2e9f-48eb-95e5-9552f7358b69">
-      <console name="RemoteSQL" type="STANDARD" schema="myVUCAu40e" session="Main"><![CDATA[SELECT * FROM BOOKING;]]></console>
+      <console name="RemoteSQL" type="STANDARD" schema="myVUCAu40e" session="Main">SELECT * FROM BOOKING;</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
